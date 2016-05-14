@@ -1,0 +1,98 @@
+﻿@model GestionLegalite.Models.solicitude
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="chute chute-center">
+    <div class="mw1000 center-block">
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- -------------- Column Center -------------- -->
+
+            <div class="allcp-form theme-primary tab-pane active mw600" id="login" role="tabpanel">
+                <div class="panel fluid-width">
+                    <div class="form-horizontal">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <span class="panel-title">
+                                        Detalles de la solcitud
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.fechaHoraInicio)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.fechaHoraInicio)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaHoraFin)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaHoraFin)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.estado)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.estado)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.mensaje)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.mensaje)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.asesore.nombreusuario)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.asesore.nombreusuario)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.cliente.nombreusuario)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.cliente.nombreusuario)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.actividade.actividad)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.actividade.actividad)
+                            </dd>
+
+                        </dl>
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.idsolicitud }) |
+                    @Html.ActionLink("Regresar al listado", "Index")
+                </p>
+            </div>
+        </section>
+    </div>
+    <!-- -------------- /Column Center -------------- -->
+    
+</div>
+

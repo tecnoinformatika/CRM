@@ -1,0 +1,58 @@
+﻿@model IEnumerable<GestionLegalite.Models.actividade>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="chute chute-center">
+    <div class="mw1000 center-block">
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- -------------- Column Center -------------- -->
+
+
+            <div class="allcp-form theme-primary tab-pane active mw600" id="login" role="tabpanel">
+                <div class="panel fluid-width">
+                    <h2>Listado de actividades</h2>
+
+                    <p>
+                        @Html.ActionLink("Crear nuevo", "Create")
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.actividad)
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.actividad)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.actividad }) |
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.actividad }) |
+                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.actividad })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+                <!-- -------------- /Panel -------------- -->
+            </div>
+
+
+
+            <!-- -------------- /Column Center -------------- -->
+
+        </section>
+    </div>
+</div>

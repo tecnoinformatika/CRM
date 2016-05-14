@@ -1,0 +1,95 @@
+﻿@model IEnumerable<GestionLegalite.Models.solicitude>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="chute chute-center">
+    <div class="mw1000 center-block">
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- -------------- Column Center -------------- -->
+
+
+            <div class="allcp-form theme-primary tab-pane active mw600" id="login" role="tabpanel">
+                <div class="panel fluid-width">
+                    <h2>Listado de solicitudes</h2>
+
+                    <p>
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fechaHoraInicio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FechaHoraFin)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.estado)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.mensaje)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.asesore.nombreusuario)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.cliente.nombreusuario)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.actividade.actividad)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Respuesta)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fechaHoraInicio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaHoraFin)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.estado)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.mensaje)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.asesore.nombreusuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cliente.nombreusuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.actividade.actividad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Respuesta)
+                                </td>
+                                <td>
+                                   @Html.ActionLink("Details", "Details", new { id = item.idsolicitud })
+                                 </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+                <!-- -------------- /Panel -------------- -->
+            </div>
+
+
+
+            <!-- -------------- /Column Center -------------- -->
+
+        </section>
+    </div>
+</div>

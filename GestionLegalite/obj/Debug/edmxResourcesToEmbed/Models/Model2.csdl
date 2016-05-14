@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="legaliteModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="legaliteEntities2" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(legaliteModel1.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(legaliteModel1.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="actividades" EntityType="legaliteModel1.actividade" />
+    <EntitySet Name="asesores" EntityType="legaliteModel1.asesore" />
+    <EntitySet Name="clientes" EntityType="legaliteModel1.cliente" />
+    <EntitySet Name="detallesolicituds" EntityType="legaliteModel1.detallesolicitud" />
+    <EntitySet Name="posts" EntityType="legaliteModel1.post" />
+    <EntitySet Name="reposts" EntityType="legaliteModel1.repost" />
+    <EntitySet Name="solicitudes" EntityType="legaliteModel1.solicitude" />
+    <EntitySet Name="subscripcions" EntityType="legaliteModel1.subscripcion" />
+    <EntitySet Name="sysdiagrams" EntityType="legaliteModel1.sysdiagram" />
+    <AssociationSet Name="FK_solicitudes_asesores" Association="legaliteModel1.FK_solicitudes_asesores">
+      <End Role="asesore" EntitySet="asesores" />
+      <End Role="solicitude" EntitySet="solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subscripcion_asesores" Association="legaliteModel1.FK_subscripcion_asesores">
+      <End Role="asesore" EntitySet="asesores" />
+      <End Role="subscripcion" EntitySet="subscripcions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_post_clientes" Association="legaliteModel1.FK_post_clientes">
+      <End Role="cliente" EntitySet="clientes" />
+      <End Role="post" EntitySet="posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_solicitudes_clientes" Association="legaliteModel1.FK_solicitudes_clientes">
+      <End Role="cliente" EntitySet="clientes" />
+      <End Role="solicitude" EntitySet="solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_detallesolicitud_solicitudes" Association="legaliteModel1.FK_detallesolicitud_solicitudes">
+      <End Role="solicitude" EntitySet="solicitudes" />
+      <End Role="detallesolicitud" EntitySet="detallesolicituds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_repost_post" Association="legaliteModel1.FK_repost_post">
+      <End Role="post" EntitySet="posts" />
+      <End Role="repost" EntitySet="reposts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subscripcion_post" Association="legaliteModel1.FK_subscripcion_post">
+      <End Role="post" EntitySet="posts" />
+      <End Role="subscripcion" EntitySet="subscripcions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_solicitudes_actividades" Association="legaliteModel1.FK_solicitudes_actividades">
+      <End Role="actividade" EntitySet="actividades" />
+      <End Role="solicitude" EntitySet="solicitudes" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="actividade">
+    <Key>
+      <PropertyRef Name="actividad" />
+    </Key>
+    <Property Name="actividad" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="solicitudes" Relationship="legaliteModel1.FK_solicitudes_actividades" FromRole="actividade" ToRole="solicitude" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="asesore">
+    <Key>
+      <PropertyRef Name="idasesor" />
+    </Key>
+    <Property Name="idasesor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreusuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nivel" Type="Int32" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="salariobasico" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="costodiario" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="costohora" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="solicitudes" Relationship="legaliteModel1.FK_solicitudes_asesores" FromRole="asesore" ToRole="solicitude" />
+    <NavigationProperty Name="subscripcions" Relationship="legaliteModel1.FK_subscripcion_asesores" FromRole="asesore" ToRole="subscripcion" />
+  </EntityType>
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="nit" />
+    </Key>
+    <Property Name="nit" Type="Int32" Nullable="false" />
+    <Property Name="nombreusuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="valor" Type="Int32" />
+    <NavigationProperty Name="posts" Relationship="legaliteModel1.FK_post_clientes" FromRole="cliente" ToRole="post" />
+    <NavigationProperty Name="solicitudes" Relationship="legaliteModel1.FK_solicitudes_clientes" FromRole="cliente" ToRole="solicitude" />
+  </EntityType>
+  <EntityType Name="detallesolicitud">
+    <Key>
+      <PropertyRef Name="iddetalle" />
+    </Key>
+    <Property Name="iddetalle" Type="Int32" Nullable="false" />
+    <Property Name="idsolicitud" Type="Int32" />
+    <Property Name="respuestaasesor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mensajecliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fechahoraactualizacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="solicitude" Relationship="legaliteModel1.FK_detallesolicitud_solicitudes" FromRole="detallesolicitud" ToRole="solicitude" />
+  </EntityType>
+  <EntityType Name="post">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="idcliente" Type="Int32" />
+    <Property Name="Actividad" Type="Int32" />
+    <NavigationProperty Name="cliente" Relationship="legaliteModel1.FK_post_clientes" FromRole="post" ToRole="cliente" />
+    <NavigationProperty Name="reposts" Relationship="legaliteModel1.FK_repost_post" FromRole="post" ToRole="repost" />
+    <NavigationProperty Name="subscripcion" Relationship="legaliteModel1.FK_subscripcion_post" FromRole="post" ToRole="subscripcion" />
+  </EntityType>
+  <EntityType Name="repost">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="idpost" Type="Int32" />
+    <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreación" Type="DateTime" Precision="3" />
+    <Property Name="idasesor" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="post" Relationship="legaliteModel1.FK_repost_post" FromRole="repost" ToRole="post" />
+  </EntityType>
+  <EntityType Name="solicitude">
+    <Key>
+      <PropertyRef Name="idsolicitud" />
+    </Key>
+    <Property Name="idsolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nitcliente" Type="Int32" />
+    <Property Name="idasesor" Type="Int32" />
+    <Property Name="actividad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fechaHoraInicio" Type="DateTime" Precision="3" />
+    <Property Name="FechaHoraFin" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="mensaje" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="asesore" Relationship="legaliteModel1.FK_solicitudes_asesores" FromRole="solicitude" ToRole="asesore" />
+    <NavigationProperty Name="cliente" Relationship="legaliteModel1.FK_solicitudes_clientes" FromRole="solicitude" ToRole="cliente" />
+    <NavigationProperty Name="detallesolicituds" Relationship="legaliteModel1.FK_detallesolicitud_solicitudes" FromRole="solicitude" ToRole="detallesolicitud" />
+    <NavigationProperty Name="actividade" Relationship="legaliteModel1.FK_solicitudes_actividades" FromRole="solicitude" ToRole="actividade" />
+    <Property Name="Respuesta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="subscripcion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="idpost" Type="Int32" />
+    <Property Name="idasesor" Type="Int32" />
+    <NavigationProperty Name="asesore" Relationship="legaliteModel1.FK_subscripcion_asesores" FromRole="subscripcion" ToRole="asesore" />
+    <NavigationProperty Name="post" Relationship="legaliteModel1.FK_subscripcion_post" FromRole="subscripcion" ToRole="post" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_solicitudes_asesores">
+    <End Type="legaliteModel1.asesore" Role="asesore" Multiplicity="0..1" />
+    <End Type="legaliteModel1.solicitude" Role="solicitude" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="asesore">
+        <PropertyRef Name="idasesor" />
+      </Principal>
+      <Dependent Role="solicitude">
+        <PropertyRef Name="idasesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subscripcion_asesores">
+    <End Type="legaliteModel1.asesore" Role="asesore" Multiplicity="0..1" />
+    <End Type="legaliteModel1.subscripcion" Role="subscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="asesore">
+        <PropertyRef Name="idasesor" />
+      </Principal>
+      <Dependent Role="subscripcion">
+        <PropertyRef Name="idasesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_post_clientes">
+    <End Type="legaliteModel1.cliente" Role="cliente" Multiplicity="0..1" />
+    <End Type="legaliteModel1.post" Role="post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="nit" />
+      </Principal>
+      <Dependent Role="post">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_solicitudes_clientes">
+    <End Type="legaliteModel1.cliente" Role="cliente" Multiplicity="0..1" />
+    <End Type="legaliteModel1.solicitude" Role="solicitude" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="nit" />
+      </Principal>
+      <Dependent Role="solicitude">
+        <PropertyRef Name="nitcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_detallesolicitud_solicitudes">
+    <End Type="legaliteModel1.solicitude" Role="solicitude" Multiplicity="0..1" />
+    <End Type="legaliteModel1.detallesolicitud" Role="detallesolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="solicitude">
+        <PropertyRef Name="idsolicitud" />
+      </Principal>
+      <Dependent Role="detallesolicitud">
+        <PropertyRef Name="idsolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_repost_post">
+    <End Type="legaliteModel1.post" Role="post" Multiplicity="0..1" />
+    <End Type="legaliteModel1.repost" Role="repost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="post">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="repost">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subscripcion_post">
+    <End Type="legaliteModel1.post" Role="post" Multiplicity="1" />
+    <End Type="legaliteModel1.subscripcion" Role="subscripcion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="post">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="subscripcion">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_solicitudes_actividades">
+    <End Type="legaliteModel1.actividade" Role="actividade" Multiplicity="0..1" />
+    <End Type="legaliteModel1.solicitude" Role="solicitude" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actividade">
+        <PropertyRef Name="actividad" />
+      </Principal>
+      <Dependent Role="solicitude">
+        <PropertyRef Name="actividad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

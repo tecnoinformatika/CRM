@@ -1,0 +1,54 @@
+﻿@model GestionLegalite.Models.actividade
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="chute chute-center">
+    <div class="mw1000 center-block">
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- -------------- Column Center -------------- -->
+
+            <div class="allcp-form theme-primary tab-pane active mw600" id="login" role="tabpanel">
+                <div class="panel fluid-width">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <span class="panel-title">
+                                    Eliminar actividad
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.actividad)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.actividad)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-bordered btn-danger" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <!-- -------------- /Column Center -------------- -->
+        </section>
+    </div>
+</div>

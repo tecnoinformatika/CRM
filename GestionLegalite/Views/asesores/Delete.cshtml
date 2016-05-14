@@ -1,0 +1,101 @@
+﻿@model GestionLegalite.Models.asesore
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="chute chute-center">
+    <div class="mw1000 center-block">
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- -------------- Column Center -------------- -->
+
+            <div class="allcp-form theme-primary tab-pane active mw600" id="login" role="tabpanel">
+                <div class="panel fluid-width">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <span class="panel-title">
+                                    Eliminar asesor
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Nombre de usuario
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.nombreusuario)
+                        </dd>
+
+                        <dt>
+                            Contraseña
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.password)
+                        </dd>
+
+                        <dt>
+                            Nivel de acceso
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.nivel)
+                        </dd>
+
+                        <dt>
+                            Nombre completo
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.nombre)
+                        </dd>
+
+                        <dt>
+                            Salario base
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.salariobasico)
+                        </dd>
+
+                        <dt>
+                            Costo por día
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.costodiario)
+                        </dd>
+
+                        <dt>
+                            Costo por hora
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.costohora)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-danger" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+             
+            </div>
+    </div>
+    <!-- -------------- /Column Center -------------- -->
+    </section>
+</div>
+</div>

@@ -1,0 +1,48 @@
+﻿@model GestionLegalite.Models.actividade
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="chute chute-center">
+    <div class="mw1000 center-block">
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- -------------- Column Center -------------- -->
+
+            <div class="allcp-form theme-primary tab-pane active mw600" id="login" role="tabpanel">
+                <div class="panel fluid-width">
+                    <div class="form-horizontal">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <span class="panel-title">
+                                        Detalles de la actividad
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr />
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.actividad)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.actividad)
+                            </dd>
+
+                        </dl>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Editar", "Edit", new { id = Model.actividad }) |
+                        @Html.ActionLink("Regresar al listado", "Index")
+                    </p>
+                </div>
+            </div>
+            <!-- -------------- /Column Center -------------- -->
+        </section>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+﻿@model GestionLegalite.Models.cliente
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="chute chute-center">
+    <div class="mw1000 center-block">
+        <section id="content" class="table-layout animated fadeIn">
+
+            <!-- -------------- Column Center -------------- -->
+         
+                        <div class="allcp-form theme-primary tab-pane active mw600" id="login" role="tabpanel">
+                            <div class="panel fluid-width">
+                                
+                                @using (Html.BeginForm())
+
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-horizontal">
+                                        <
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="panel-body pn">
+                                            <div class="form-group">
+                                                <div class="col-md-2">
+                                                    @Html.Label("Nit")
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <label for="firstname" class="field prepend-icon">
+                                                        @Html.EditorFor(model => model.nit, new { htmlAttributes = new { @class = "gui-input" } })
+                                                        @Html.ValidationMessageFor(model => model.nit, "", new { @class = "text-danger" })
+                                                        <label for="firstname" class="field-icon">
+                                                            <i class="fa fa-sort-numeric-asc"></i>
+                                                        </label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-2">
+                                                    @Html.Label("Nombre de usuario")
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <label for="nombreusuario" class="field prepend-icon">
+                                                        @Html.EditorFor(model => model.nombreusuario, new { htmlAttributes = new { @class = "gui-input" } })
+                                                        @Html.ValidationMessageFor(model => model.nombreusuario, "", new { @class = "text-danger" })
+                                                        <label for="nombreusuario" class="field-icon">
+                                                            <i class="fa fa-user"></i>
+                                                        </label>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-2">
+                                                    @Html.Label("Contraseña")
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <label for="password" class="field prepend-icon">
+                                                        @Html.PasswordFor(model => model.password, new { @class = "gui-input" } )
+                                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                                        <label for="password" class="field-icon">
+                                                            <i class="fa fa-lock"></i>
+                                                        </label>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-2">
+                                                    @Html.Label("Nombre completo")
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <label for="nombreusuario" class="field prepend-icon">
+                                                        @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "gui-input" } })
+                                                        @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+                                                        <label for="nombreusuario" class="field-icon">
+                                                            <i class="fa fa-user"></i>
+                                                        </label>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-2">
+                                                    @Html.Label("Departamento")
+                                                </div>
+                                                <div class="col-md-10">
+                                                    
+                                                    <label for="departamento" class="field prepend-icon">
+                                                        @Html.EditorFor(model => model.departamento, new { htmlAttributes = new { @class = "gui-input" } })
+                                                        @Html.ValidationMessageFor(model => model.departamento, "", new { @class = "text-danger" })
+                                                        <label for="departamento" class="field-icon">
+                                                            <i class="fa fa-arrows"></i>
+                                                        </label>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-2">
+                                                    @Html.Label("Valor")
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <label for="departamento" class="field prepend-icon">
+                                                        @Html.EditorFor(model => model.valor, new { htmlAttributes = new { @class = "gui-input" } })
+                                                        @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
+                                                        <label for="departamento" class="field-icon">
+                                                            <i class="fa fa-calculator"></i>
+                                                        </label>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Guardar" class="btn btn-bordered btn-success" />
+                                                </div>
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                                
+                                            
+                                            <div>
+                                                @Html.ActionLink("Regresar al listado", "Index")
+                                            </div>
+                                        </div>
+                            <!-- -------------- /Panel -------------- -->
+                       
+                                }
+
+                </div>
+            </div>
+            <!-- -------------- /Column Center -------------- -->
+        </section>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

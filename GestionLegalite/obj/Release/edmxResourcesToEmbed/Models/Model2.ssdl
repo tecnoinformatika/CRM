@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="legaliteModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="actividades">
+    <Key>
+      <PropertyRef Name="actividad" />
+    </Key>
+    <Property Name="actividad" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="asesores">
+    <Key>
+      <PropertyRef Name="idasesor" />
+    </Key>
+    <Property Name="idasesor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreusuario" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="nivel" Type="int" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="salariobasico" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="costodiario" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="costohora" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="nit" />
+    </Key>
+    <Property Name="nit" Type="int" Nullable="false" />
+    <Property Name="nombreusuario" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="departamento" Type="varchar" MaxLength="50" />
+    <Property Name="valor" Type="int" />
+  </EntityType>
+  <EntityType Name="detallesolicitud">
+    <Key>
+      <PropertyRef Name="iddetalle" />
+    </Key>
+    <Property Name="iddetalle" Type="int" Nullable="false" />
+    <Property Name="idsolicitud" Type="int" />
+    <Property Name="respuestaasesor" Type="varchar" MaxLength="100" />
+    <Property Name="mensajecliente" Type="varchar" MaxLength="100" />
+    <Property Name="fechahoraactualizacion" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="post">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Titulo" Type="varchar" MaxLength="50" />
+    <Property Name="Contenido" Type="varchar(max)" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="idcliente" Type="int" />
+    <Property Name="Actividad" Type="int" />
+  </EntityType>
+  <EntityType Name="repost">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="idpost" Type="int" />
+    <Property Name="Contenido" Type="varchar(max)" />
+    <Property Name="FechaCreación" Type="datetime" />
+    <Property Name="idasesor" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="solicitudes">
+    <Key>
+      <PropertyRef Name="idsolicitud" />
+    </Key>
+    <Property Name="idsolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nitcliente" Type="int" />
+    <Property Name="idasesor" Type="int" />
+    <Property Name="actividad" Type="varchar" MaxLength="100" />
+    <Property Name="fechaHoraInicio" Type="datetime" />
+    <Property Name="FechaHoraFin" Type="datetime" />
+    <Property Name="estado" Type="varchar" MaxLength="50" />
+    <Property Name="mensaje" Type="varchar" MaxLength="100" />
+    <Property Name="Respuesta" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="subscripcion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="idpost" Type="int" />
+    <Property Name="idasesor" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_detallesolicitud_solicitudes">
+    <End Role="solicitudes" Type="Self.solicitudes" Multiplicity="0..1" />
+    <End Role="detallesolicitud" Type="Self.detallesolicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="solicitudes">
+        <PropertyRef Name="idsolicitud" />
+      </Principal>
+      <Dependent Role="detallesolicitud">
+        <PropertyRef Name="idsolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_post_clientes">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="post" Type="Self.post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="nit" />
+      </Principal>
+      <Dependent Role="post">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_repost_post">
+    <End Role="post" Type="Self.post" Multiplicity="0..1" />
+    <End Role="repost" Type="Self.repost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="post">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="repost">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_solicitudes_actividades">
+    <End Role="actividades" Type="Self.actividades" Multiplicity="0..1" />
+    <End Role="solicitudes" Type="Self.solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actividades">
+        <PropertyRef Name="actividad" />
+      </Principal>
+      <Dependent Role="solicitudes">
+        <PropertyRef Name="actividad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_solicitudes_asesores">
+    <End Role="asesores" Type="Self.asesores" Multiplicity="0..1" />
+    <End Role="solicitudes" Type="Self.solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="asesores">
+        <PropertyRef Name="idasesor" />
+      </Principal>
+      <Dependent Role="solicitudes">
+        <PropertyRef Name="idasesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_solicitudes_clientes">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="solicitudes" Type="Self.solicitudes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="nit" />
+      </Principal>
+      <Dependent Role="solicitudes">
+        <PropertyRef Name="nitcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subscripcion_asesores">
+    <End Role="asesores" Type="Self.asesores" Multiplicity="0..1" />
+    <End Role="subscripcion" Type="Self.subscripcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="asesores">
+        <PropertyRef Name="idasesor" />
+      </Principal>
+      <Dependent Role="subscripcion">
+        <PropertyRef Name="idasesor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subscripcion_post">
+    <End Role="post" Type="Self.post" Multiplicity="1" />
+    <End Role="subscripcion" Type="Self.subscripcion" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="post">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="subscripcion">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="legaliteModel1StoreContainer">
+    <EntitySet Name="actividades" EntityType="Self.actividades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="asesores" EntityType="Self.asesores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="detallesolicitud" EntityType="Self.detallesolicitud" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="post" EntityType="Self.post" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="repost" EntityType="Self.repost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="solicitudes" EntityType="Self.solicitudes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subscripcion" EntityType="Self.subscripcion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_detallesolicitud_solicitudes" Association="Self.FK_detallesolicitud_solicitudes">
+      <End Role="solicitudes" EntitySet="solicitudes" />
+      <End Role="detallesolicitud" EntitySet="detallesolicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_post_clientes" Association="Self.FK_post_clientes">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="post" EntitySet="post" />
+    </AssociationSet>
+    <AssociationSet Name="FK_repost_post" Association="Self.FK_repost_post">
+      <End Role="post" EntitySet="post" />
+      <End Role="repost" EntitySet="repost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_solicitudes_actividades" Association="Self.FK_solicitudes_actividades">
+      <End Role="actividades" EntitySet="actividades" />
+      <End Role="solicitudes" EntitySet="solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_solicitudes_asesores" Association="Self.FK_solicitudes_asesores">
+      <End Role="asesores" EntitySet="asesores" />
+      <End Role="solicitudes" EntitySet="solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_solicitudes_clientes" Association="Self.FK_solicitudes_clientes">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="solicitudes" EntitySet="solicitudes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subscripcion_asesores" Association="Self.FK_subscripcion_asesores">
+      <End Role="asesores" EntitySet="asesores" />
+      <End Role="subscripcion" EntitySet="subscripcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subscripcion_post" Association="Self.FK_subscripcion_post">
+      <End Role="post" EntitySet="post" />
+      <End Role="subscripcion" EntitySet="subscripcion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
